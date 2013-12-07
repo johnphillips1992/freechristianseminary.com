@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <html>
 
 <head>
@@ -7,10 +9,10 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 
+<link rel="stylesheet" href="{% static "seminary/css/base.css" %}">
 
 </head>
 <body>
-{% block main-body %}
 
    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
@@ -42,7 +44,6 @@
 
     </div><!-- /.container -->
 
-{% endblock %}
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://code.jquery.com/jquery.js"></script>
