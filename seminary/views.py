@@ -60,3 +60,4 @@ class SectionDetailView(DetailView):
 	def get_object(self):
 		pk = self.kwargs.get('section_pk', None)
 		return get_object_or_404(models.Section, pk=pk)
+

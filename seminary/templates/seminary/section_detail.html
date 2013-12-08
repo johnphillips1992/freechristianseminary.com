@@ -1,5 +1,12 @@
 {% extends "base/base.html" %}
 
+{% block breadcrumbs %}
+<li><a href="{% url "degree-list" %}">Degrees</a></li>
+<li><a href="{% url "course-list" pk=object.course.degree.pk %}">Courses</a></li>
+<li><a href="{% url "section-list" course_pk=object.course.pk degree_pk=object.course.degree.pk %}">Sections</a></li>
+<li class="active">Section Content</li>
+{% endblock %}
+
 {% block body-title %}{{ object.name }}{% endblock %}
 
 {% block body-text %}

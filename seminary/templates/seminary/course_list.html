@@ -1,17 +1,20 @@
 {% extends "base/base.html" %}
 
+{% block breadcrumbs %}
+<li><a href="{% url "degree-list" %}">Degrees</a></li>
+<li class="active">Courses</li>
+{% endblock %}
+
 {% block body-title %}{{ degree.name }}{% endblock %}
 
 {% block body-text %}
 <table class="table">
         <thead>
-                <th>Number</th>
                 <th>Name</th>
         </thead>
         <tbody>
                 {% for course in object_list %}
                 <tr>
-                        <td>{{ course.id }}</td>
                         <td><a href="{% url "section-list" course_pk=course.pk degree_pk=degree.pk %}">{{ course.name }}</a></td>
                 </tr>
                 {% endfor %}

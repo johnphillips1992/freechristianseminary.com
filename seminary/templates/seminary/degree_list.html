@@ -5,13 +5,11 @@
 {% block body-text %}
 <table class="table">
 	<thead>
-		<th>Number</th>
 		<th>Name</th>
 	</thead>
 	<tbody>
 		{% for degree in object_list %}
 		<tr>
-			<td>{{ degree.id }}</td>
 			<td><a href="{% url "course-list" pk=degree.pk %}">{{ degree.name }}</a></td>
 		</tr>
 		{% endfor %}
