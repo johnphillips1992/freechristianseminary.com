@@ -1,0 +1,7 @@
+{% extends "base/base.html" %}
+
+{% block body-title %}{{ object.name }}{% endblock %}
+
+{% block body-text %}
+{{ object.content|linebreaksbr }}
+{% endblock %}

@@ -1,4 +1,5 @@
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
 from django.shortcuts import get_object_or_404
 
@@ -52,3 +53,10 @@ class SectionListView(ListView):
 		course = self.get_course()
 
 		return qs.filter(course=course)
+
+class SectionDetailView(DetailView):
+	model = models.Section
+
+	def get_object(self):
+		pk = self.kwargs.get('section_pk', None)
+		return get_object_or_404(models.Section, pk=pk)

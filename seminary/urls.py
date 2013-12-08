@@ -11,5 +11,7 @@ urlpatterns = patterns('',
 	name='course-list'),
     url(r'^degrees/(?P<degree_pk>\d+)/courses/(?P<course_pk>\d+)/sections/$',
 	views.SectionListView.as_view(), name='section-list'),
+    url(r'^degrees/(?P<degree_pk>\d+)/courses/(?P<course_pk>\d+)/sections/(?P<section_pk>\d+)/$',
+	views.SectionDetailView.as_view(), name='section-detail'),
 )
 

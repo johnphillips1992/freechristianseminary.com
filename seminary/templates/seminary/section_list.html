@@ -12,7 +12,7 @@
                 {% for section in object_list %}
                 <tr>
                         <td>{{ section.id }}</td>
-                        <td><a href="#">{{ section.name }}</a></td>
+                        <td><a href="{% url "section-detail" degree_pk=degree.pk course_pk=course.pk section_pk=section.pk %}">{{ section.name }}</a></td>
                 </tr>
                 {% endfor %}
         </tbody>
