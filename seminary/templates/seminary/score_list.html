@@ -1,0 +1,27 @@
+{% extends "base/base.html" %}
+
+{% block breadcrumbs %}
+<li><a href="/">Home</a></li>
+<li><a href="{% url "degree-list" %}">Degrees</a></li>
+<li><a href="{% url "course-list" pk=course.degree.pk %}">Courses</a></li>
+<li class="active">Scores</li>
+{% endblock %}
+
+{% block body-title %}{{ course }}{% endblock %}
+
+{% block body-text %}
+<table class="table">
+        <thead>
+                <th>Date</th>
+		<th>Score</th>
+        </thead>
+        <tbody>
+                {% for score in object_list %}
+                <tr>
+                        <td>{{ score.date }}</td>
+                	<td>{{ score.score }}</td>
+		</tr>
+                {% endfor %}
+        </tbody>
+</table>
+{% endblock %}

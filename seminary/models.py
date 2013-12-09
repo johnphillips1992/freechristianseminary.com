@@ -29,7 +29,12 @@ class Question(models.Model):
 	answer_b = models.TextField(blank=True, null=True)
 	answer_c = models.TextField(blank=True, null=True)
 	answer_d = models.TextField(blank=True, null=True)
-	correct_answer = models.CharField(max_length=1, blank=True, null=True)
+	correct_answer = models.CharField(max_length=1, blank=True, null=True,
+				choices=(
+					('A', 'A'),
+					('B', 'B'),
+					('C', 'C'),
+					('D', 'D')))
 
 class Score(models.Model):
 	user = models.ForeignKey(User, related_name='+')

@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 
+from django.views.generic import  TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.base import View
@@ -91,15 +92,45 @@ class TestView(ListView):
 					answer = request.POST['question_%s' % question.pk]
 					if answer == question.correct_answer:
 						score = score + 100
-			score = score/questions.all().count()
+			score = int(score/questions.all().count())
 			course = self.get_course()
 			models.Score.objects.create(user=request.user, course=course, score=score)
-		return HttpResponseRedirect('/degrees/%s/courses/' % course.degree.pk)
+			return HttpResponseRedirect('/degrees/%s/courses/%s/score/%s/' % (course.degree.pk, course.pk, score))
+		return HttpResponseRedirect('/degrees/%s/courses/%s/' % (course.degree.pk, course.pk))
 
 	def get_queryset(self):
 		qs = super(TestView, self).get_queryset()
 		course = self.get_course()
 		return qs.filter(course=course)
+
+class ScoreView(TemplateView):
+	template_name = 'seminary/score.html'
+
+	def get_course(self):
+		pk = self.kwargs.get('course_pk', None)
+		return get_object_or_404(models.Course, pk=pk)
+
+	def get_context_data(self, **context):
+		context = super(ScoreView, self).get_context_data(**context)
+		context['score'] = self.kwargs.get('score', None)
+		context['course'] = self.get_course()
+		return context
+
+class ScoreListView(ListView):
+	model = models.Score
+
+	def get_course(self):
+		pk = self.kwargs.get('course_pk', None)
+		return get_object_or_404(models.Course, pk=pk)
+
+	def get_context_data(self, **context):
+		context = super(ScoreListView, self).get_context_data(**context)
+		context['course'] = self.get_course()
+		return context
+
+	def get_queryset(self):
+		qs = super(ScoreListView, self).get_queryset()
+		return qs.filter(user=self.request.user, course=self.get_course())
 
 class UserCreationView(FormView):
 	form_class = UserCreationForm

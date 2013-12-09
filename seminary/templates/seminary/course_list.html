@@ -18,7 +18,8 @@
                 {% for course in object_list %}
                 <tr>
                         <td><a href="{% url "section-list" course_pk=course.pk degree_pk=degree.pk %}">{{ course.name }}</a></td>
-			<td><a href="{% url "test" course_pk=course.pk degree_pk=degree.pk %}">Test</a></td>
+			<td><a href="{% url "test" course_pk=course.pk degree_pk=degree.pk %}">Take Test</a><br>
+			    <a href="{% url "score-list" course_pk=course.pk degree_pk=degree.pk %}">View Scores</a></td>
 		 </tr>
                 {% endfor %}
         </tbody>

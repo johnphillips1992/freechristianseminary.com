@@ -18,6 +18,11 @@ urlpatterns = patterns('',
     url(r'^degrees/(?P<degree_pk>\d+)/courses/(?P<course_pk>\d+)/test/$',
 	login_required(
 		views.TestView.as_view()), name='test'),
+    url(r'^degrees/(?P<degree_pk>\d+)/courses/(?P<course_pk>\d+)/scores/$',
+	login_required(
+		views.ScoreListView.as_view()), name='score-list'),
+    url(r'^degrees/(?P<degree_pk>\d+)/courses/(?P<course_pk>\d+)/score/(?P<score>\d+)/$',
+	views.ScoreView.as_view(), name='score'),
     url(r'^accounts/create/$',
 	views.UserCreationView.as_view(), name='user-creation'),
 )

@@ -1,0 +1,14 @@
+{% extends "base/base.html" %}
+
+{% block breadcrumbs %}
+<li><a href="/">Home</a></li>
+<li><a href="{% url "degree-list" %}">Degrees</a></li>
+<li><a href="{% url "course-list" pk=course.degree.pk %}">Courses</a></li>
+<li class="active">Score</li>
+{% endblock %}
+
+{% block body-title %}{{ course }}{% endblock %}
+
+{% block body-text %}
+<h2>{{ score }}%</h2>
+{% endblock %}

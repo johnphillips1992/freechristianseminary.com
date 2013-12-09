@@ -1,10 +1,18 @@
 {% extends 'base/base.html' %}
 
+{% block breadcrumbs %}
+<li><a href="/">Home</a></li>
+<li><a href="{% url "degree-list" %}">Degrees</a></li>
+<li><a href="{% url "course-list" pk=course.degree.pk %}">Courses</a></li>
+<li class="active">Test</li>
+{% endblock %}
+
 {% block body-title %}
 {{ course.name }} Test
 {% endblock %}
 
 {% block body-text %}
+{% if object_list %}
 <div class="test-questions">
 <form method="post">{% csrf_token %}
 {% for question in object_list %}
@@ -24,4 +32,5 @@
 </div>
 </form>
 </div>
+{% endif %}
 {% endblock %}
