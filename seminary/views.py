@@ -1,3 +1,5 @@
+from django.http import HttpResponseRedirect
+
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 
@@ -78,11 +80,21 @@ class TestView(ListView):
 		context['course'] = self.get_course()
 		return context
 
-	def get(self, request, *args, **kwargs):
-		return super(TestView, self).get(request, *args, **kwargs)
-	
 	def post(self, request, *args, **kwargs):
-		return super(TestView, self).post(request, *args, **kwargs)
+		print("%s" % request.POST)
+		questions = self.get_queryset()
+		score = 0
+		if questions.all().count() > 0:
+			for question in questions.all():
+				question_pk = 'question_%s' % question.pk
+				if question_pk in request.POST:
+					answer = request.POST['question_%s' % question.pk]
+					if answer == question.correct_answer:
+						score = score + 100
+			score = score/questions.all().count()
+			course = self.get_course()
+			models.Score.objects.create(user=request.user, course=course, score=score)
+		return HttpResponseRedirect('/degrees/%s/courses/' % course.degree.pk)
 
 	def get_queryset(self):
 		qs = super(TestView, self).get_queryset()
