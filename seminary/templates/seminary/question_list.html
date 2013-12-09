@@ -1,0 +1,11 @@
+{% extends 'base/base.html' %}
+
+{% block body-title %}
+{{ course.name }} Test
+{% endblock %}
+
+{% block body-text %}
+{% for question in object_list %}
+	{{ forloop.counter }}.&nbsp;{{ question.question|linebreaksbr }}<br>
+{% endfor %}
+{% endblock %}

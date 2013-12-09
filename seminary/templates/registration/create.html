@@ -1,0 +1,14 @@
+{% extends "base/base.html" %}
+
+{% block body-title %}Account Creation{% endblock %}
+
+{% block body-text %}
+	<div class="user-creation">
+            <form method="post">{% csrf_token %}
+		{{ form.as_p }}
+                <div class="actions">
+                    <button type="submit" class="btn primary">Submit</button>
+                </div>
+            </form>
+	</div>
+{% endblock %}
