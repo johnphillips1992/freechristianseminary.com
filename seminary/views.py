@@ -35,7 +35,7 @@ class CourseListView(ListView):
 
 		degree = self.get_degree()
 
-		return qs.filter(degree=degree)	
+		return qs.filter(degree=degree).order_by('pk')	
 
 class SectionListView(ListView):
 	model = models.Section
@@ -60,10 +60,25 @@ class SectionListView(ListView):
 
 		course = self.get_course()
 
-		return qs.filter(course=course)
+		return qs.filter(course=course).order_by('pk')
 
 class SectionDetailView(DetailView):
 	model = models.Section
+
+	def post(self, request, *args, **kwargs):
+		if request.user.is_authenticated:
+			if "comment" in request.POST:
+				content = request.POST['content']
+				comment = models.Comment.objects.create(content=content,
+					user=request.user,
+					section=self.get_object(),
+					is_approved=False)
+				comment.save()
+		return HttpResponseRedirect('/degrees/%s/courses/%s/sections/%s/' % (self.get_object().course.degree.pk, self.get_object().course.pk, self.get_object().pk))
+
+	def get_context_data(self, **context):
+		context = super(SectionDetailView, self).get_context_data(**context)
+		return context
 
 	def get_object(self):
 		pk = self.kwargs.get('section_pk', None)
@@ -134,7 +149,7 @@ class ScoreListView(ListView):
 
 class UserCreationView(FormView):
 	form_class = UserCreationForm
-	success_url = '/degrees/'
+	success_url = '/'
 	template_name = 'registration/create.html'
 
 	def form_valid(self, form):

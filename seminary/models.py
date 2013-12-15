@@ -2,6 +2,10 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
+from djangocms_text_ckeditor.fields import HTMLField
+
+
+
 class Degree(models.Model):
 	name = models.CharField(max_length=255, blank=False, null=False)
 	certificate = models.FileField(upload_to='certificate', blank=True, null=True)
@@ -18,7 +22,7 @@ class Course(models.Model):
 class Section(models.Model):
 	name = models.CharField(max_length=255, blank=True, null=True)
 	course = models.ForeignKey(Course, related_name='sections')
-	content = models.TextField(blank=True, null=True)
+	content = HTMLField(blank=True, null=True)
 	def __unicode__(self):
 		return '%s %s %s' % (self.course.degree.name, self.course.name,  self.name)
 
@@ -43,3 +47,12 @@ class Score(models.Model):
 	score = models.PositiveIntegerField(blank=False, null=False)
 	def __unicode__(self):
 		return '%s %s %s' % (self.user.username, self.course.name, self.date)
+
+class Comment(models.Model):
+	user = models.ForeignKey(User, related_name='comments')
+	section = models.ForeignKey(Section, related_name='comments')
+	content = models.TextField(blank=True, null=True)
+	is_approved = models.BooleanField()
+	def __unicode__(self):
+		return '%s: %s' % (self.user.username, self.content)
+

@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load staticfiles menu_tags cms_tags sekizai_tags %}
 
 <html>
 
@@ -10,44 +10,31 @@
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="{% static "seminary/css/base.css" %}">
-
+{% render_block "css" %}
 </head>
 <body>
-
+  {% cms_toolbar %}
    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">Free Christian Seminary</a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
+     {% show_menu 0 1 10 10 %}
+   </div>
 
     <div class="container">
-
+      <ol class="breadcrumb">
+        {% block breadcrumbs %}{% endblock %}
+      </ol>
       <div class="main-content">
-	<ol class="breadcrumb">
-		{% block breadcrumbs %}{% endblock %}
-	</ol>
-        <h1>{% block body-title %}{% endblock %}</h1>
-        <p class="lead">{% block body-text %}{% endblock %}</p>
+        <div class="username">
+          {% if request.user.is_authenticated %}
+            <h5>{{ request.user.username }}</h5>
+          {% endif %}
+        </div>
+        <h1>{% block body-title %}{% placeholder title %}{% endblock %}</h1>
+        <div>{% block body-text %}{% placeholder content %}{% endblock %}</div>
       </div>
 
     </div><!-- /.container -->
 
-
+{% render_block "js" %}
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://code.jquery.com/jquery.js"></script>
 <!-- Latest compiled and minified JavaScript -->

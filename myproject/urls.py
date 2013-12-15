@@ -11,5 +11,5 @@ urlpatterns = patterns('',
     url(r'^', include('seminary.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^admin/', include(admin.site.urls)),
-
+    url(r'^', include('cms.urls')),
 )
