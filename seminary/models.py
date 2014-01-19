@@ -23,6 +23,7 @@ class Section(models.Model):
 	name = models.CharField(max_length=255, blank=True, null=True)
 	course = models.ForeignKey(Course, related_name='sections')
 	content = HTMLField(blank=True, null=True)
+	video_url = models.CharField(max_length=512, blank=True, null=True)
 	def __unicode__(self):
 		return '%s %s %s' % (self.course.degree.name, self.course.name,  self.name)
 

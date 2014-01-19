@@ -16,30 +16,40 @@
 	{% show_editable_model object "content" %}
 	</div>
 
-		{% if request.user.is_authenticated %}
-			<div class="comment-form well">		
-			<form method="post">{% csrf_token %}
-				<div class="form-group">
-					<label class="control-label" for="id_content">Comment</label>
-					<textarea class="form-control" cols="40" id="id_content" name="content" rows="10"></textarea>
-				</div>
-				<div class="form-group">
-					<button name="comment" type="submit" class="btn btn-primary">Submit Comment</button>
-				</div>
-			</form>
-			</div>
-		{% endif %}
 
-		{% for comment in object.comments.all %}
-			
-			{% if comment.is_approved %}
-				<div class="well comment">
-					<span class="glyphicon glyphicon-user user-icon">
-					</span>
-					{{ comment.user.username }}: {% show_editable_model comment "content" %}
-				</div>
-			{% endif %}
-
-		{% endfor %}
 {% endblock %}
 
+{% block left-colum-class %}col-md-9{% endblock %}
+
+{% block right-column %}
+{% if object.video_url %}
+<div class="main-content well">
+<iframe width="100%" height="200" src="{{ object.video_url }}" frameborder="0" allowfullscreen></iframe>
+</div>
+{% endif %}
+{% if request.user.is_authenticated %}
+	<div class="comment-form well">
+	<form method="post">{% csrf_token %}
+		<div class="form-group">
+			<label class="control-label" for="id_content">Comment</label>
+			<textarea class="form-control" cols="40" id="id_content" name="content" rows="10"></textarea>
+		</div>
+		<div class="form-group">
+			<button name="comment" type="submit" class="btn btn-primary">Submit Comment</button>
+		</div>
+	</form>
+	</div>
+{% endif %}
+
+{% for comment in object.comments.all %}
+
+	{% if comment.is_approved %}
+		<div class="well comment">
+			<span class="glyphicon glyphicon-user user-icon">
+			</span>
+			{{ comment.user.username }}: {% show_editable_model comment "content" %}
+		</div>
+	{% endif %}
+
+{% endfor %}
+{% endblock %}
