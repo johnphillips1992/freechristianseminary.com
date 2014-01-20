@@ -9,7 +9,9 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
 import json
-
+input_file = open('/home/johnphillips/webapps/app_seminary/database_config.json')
+settings_data = json.load(input_file)
+input_file.close()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -22,7 +24,7 @@ ADMINS = (('John Phillips', 'john.phillips1992@gmail.com'),)
 SITE_ID = 1
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%4ff%!b6dge(jne(#%&*y*w)hrdrxn=ovtt-lf5igh#s-)c00j'
+SECRET_KEY = settings_data['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -97,10 +99,6 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-input_file = open('/home/johnphillips/webapps/app_seminary/database_config.json')
-settings_data = json.load(input_file)
-input_file.close()
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
