@@ -7,7 +7,6 @@ https://docs.djangoproject.com/en/1.6/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
-
 import json
 input_file = open('/home/johnphillips/webapps/app_seminary/database_config.json')
 settings_data = json.load(input_file)
@@ -28,7 +27,6 @@ SECRET_KEY = settings_data['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -38,6 +36,8 @@ CKEDITOR_SETTINGS = {
             'toolbar': 'Basic',
             'skin': 'moono',
         }
+
+LOGIN_URL = '/accounts/login/'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
@@ -86,6 +86,7 @@ MIDDLEWARE_CLASSES = (
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
     'cms.middleware.language.LanguageCookieMiddleware',
+    'myproject.middleware.LoginRequiredMiddleware',
 )
 
 CMS_TEMPLATES = (

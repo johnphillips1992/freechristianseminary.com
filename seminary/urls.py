@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 from seminary import views
 
 urlpatterns = patterns('',
+    url(r'^game/$', TemplateView.as_view(template_name="seminary/game.html")),
     url(r'^$', views.DegreeListView.as_view(),
 	name='degree-list'),
     url(r'^degrees/(?P<pk>\d+)/courses/$', views.CourseListView.as_view(),
