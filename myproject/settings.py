@@ -26,10 +26,8 @@ SITE_ID = 1
 SECRET_KEY = settings_data['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["www.freechristianseminary.com", "freechristianseminary.com"]
 
 CKEDITOR_SETTINGS = {
             'language': '{{ language }}',
@@ -38,6 +36,7 @@ CKEDITOR_SETTINGS = {
         }
 
 LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',

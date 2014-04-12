@@ -18,23 +18,16 @@
      {% show_menu 0 3 10 10 %}
    </div>
    <div class="container">
-      <ol class="breadcrumb">
-        {% block breadcrumbs %}{% endblock %}
-      </ol>
    <div class="row">
-    <div class="{% block left-colum-class %}col-md-12{% endblock %}">
+    <div class="col-md-10 main-column">
+      <img class="banner" src="{% static "seminary/images/banner.jpg" %}" />
       <div class="main-content">
-        <div class="username">
-          {% if request.user.is_authenticated %}
-            <h5>{{ request.user.username }}</h5>
-          {% endif %}
-        </div>
+	<ol class="breadcrumb">
+          {% block breadcrumbs %}{% endblock %}
+        </ol>
         <h1>{% block body-title %}{% placeholder title %}{% endblock %}</h1>
         <div>{% block body-text %}{% placeholder content %}{% endblock %}</div>
       </div>
-    </div>
-    <div class="col-md-3">
-	{% block right-column %}{% endblock %}
     </div>
   </div>
   </div>
