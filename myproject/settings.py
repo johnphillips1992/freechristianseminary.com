@@ -85,7 +85,6 @@ MIDDLEWARE_CLASSES = (
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
     'cms.middleware.language.LanguageCookieMiddleware',
-    'myproject.middleware.LoginRequiredMiddleware',
 )
 
 CMS_TEMPLATES = (

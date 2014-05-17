@@ -1,9 +1,11 @@
 {% extends "base/base.html" %}
 {% load cms_tags %}
 {% block breadcrumbs %}
+<ol class="breadcrumb">
 <li><a href="/">Home</a></li>
 <li><a href="{% url "degree-list" %}">Degrees</a></li>
 <li class="active">Courses</li>
+</ol>
 {% endblock %}
 
 {% block body-title %}{% show_editable_model degree "name" %}{% endblock %}

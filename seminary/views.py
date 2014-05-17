@@ -1,5 +1,7 @@
 from django.http import HttpResponseRedirect
 
+from django.core.urlresolvers import reverse
+
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 
@@ -74,7 +76,9 @@ class SectionDetailView(DetailView):
 					section=self.get_object(),
 					is_approved=False)
 				comment.save()
-		return HttpResponseRedirect('/degrees/%s/courses/%s/sections/%s/' % (self.get_object().course.degree.pk, self.get_object().course.pk, self.get_object().pk))
+		return HttpResponseRedirect(reverse('section-detail', kwargs={'section_pk': self.get_object().pk, 
+									      'degree_pk': self.get_object().course.degree.pk,
+									      'course_pk': self.get_object().course.pk}))
 
 	def get_context_data(self, **context):
 		context = super(SectionDetailView, self).get_context_data(**context)

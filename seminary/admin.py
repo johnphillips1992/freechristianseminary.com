@@ -29,6 +29,7 @@ class SectionAdmin(FrontendEditableAdmin, admin.ModelAdmin):
 
 class CommentAdmin(FrontendEditableAdmin, admin.ModelAdmin):
 	list_display = ['__unicode__', 'user', 'section', 'is_approved']
+	list_editable = ['is_approved']
 
 admin.site.register(models.Degree, DegreeAdmin)
 admin.site.register(models.Course, CourseAdmin)

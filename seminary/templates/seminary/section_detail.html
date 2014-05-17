@@ -2,11 +2,13 @@
 {% load cms_tags %}
 
 {% block breadcrumbs %}
+<ol class="breadcrumb">
 <li><a href="/">Home</a></li>
 <li><a href="{% url "degree-list" %}">Degrees</a></li>
 <li><a href="{% url "course-list" pk=object.course.degree.pk %}">Courses</a></li>
 <li><a href="{% url "section-list" course_pk=object.course.pk degree_pk=object.course.degree.pk %}">Sections</a></li>
 <li class="active">Section Content</li>
+</ol>
 {% endblock %}
 
 {% block body-title %}{% show_editable_model object "name" %}{% endblock %}
@@ -15,11 +17,34 @@
 	<div class="section-content">
 	{% show_editable_model object "content" %}
 	</div>
+{% if request.user.is_authenticated %}
+        <div class="comment-form well">
+        <form method="post">{% csrf_token %}
+                <div class="form-group">
+                        <label class="control-label" for="id_content">Comment</label>
+                        <textarea class="form-control" cols="40" id="id_content" name="content" rows="10"></textarea>
+                </div>
+                <div class="form-group">
+                        <button name="comment" type="submit" class="btn btn-primary">Submit Comment</button>
+                </div>
+        </form>
+        </div>
+{% endif %}
 
+{% for comment in object.comments.all %}
+
+        {% if comment.is_approved %}
+                <div class="well comment">
+                        <span class="glyphicon glyphicon-user user-icon">
+                        </span>
+                        {{ comment.user.username }}: {% show_editable_model comment "content" %}
+                </div>
+        {% endif %}
+
+{% endfor %}
 
 {% endblock %}
 
-{% block left-colum-class %}col-md-9{% endblock %}
 
 {% block right-column %}
 {% if object.video_url %}
