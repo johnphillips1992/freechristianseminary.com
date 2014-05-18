@@ -3,13 +3,11 @@
 {% block body-title %}Login{% endblock %}
 
 {% block body-text %}
-            <form class="form-inline" role="form" method="post">{% csrf_token %}
+            <form role="form" method="post">{% csrf_token %}
 		<div class="form-group">
 			{{ form.as_p }}
-			<div class="actions">
-			    <button type="submit" class="btn btn-primary">Login</button>
-			</div>
 		</div>
+		<button type="submit" class="btn btn-primary">Login</button>
             </form>
-	    <a href="/accounts/create/">Create an account</a>
+	    <a href="{% url "account-creation" %}">Create an account</a>
 {% endblock %}

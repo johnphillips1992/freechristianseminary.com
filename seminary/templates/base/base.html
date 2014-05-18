@@ -15,9 +15,30 @@
 </head>
 <body>
   {% cms_toolbar %}
-   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+   <div class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
      {% show_menu 0 3 10 10 %}
    </div>
+   {% block messages %}
+     {% if messages %}
+       <div class="modal fade">
+         <div class="modal-dialog">
+           <div class="modal-content">
+             <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+               <h4 class="modal-title">Alert</h4>
+             </div>
+             <div class="modal-body">
+               {% for message in messages %}
+                 <div class="alert{% if message.tags %} alert-{{ message-tags }}{% endif %}">
+                   {{ message }}
+                 </div>
+               {% endfor %}
+             </div>
+           </div>
+         </div>
+       </div>
+     {% endif %}
+   {% endblock %}
    <div class="container main-container">
    <div class="row">
     <div class="col-md-10 main-column">

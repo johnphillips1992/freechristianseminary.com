@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 
 from django.core.urlresolvers import reverse
 
+from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 
@@ -76,6 +77,7 @@ class SectionDetailView(DetailView):
 					section=self.get_object(),
 					is_approved=False)
 				comment.save()
+				messages.success(request, 'Your comment has been submitted and is pending approval')
 		return HttpResponseRedirect(reverse('section-detail', kwargs={'section_pk': self.get_object().pk, 
 									      'degree_pk': self.get_object().course.degree.pk,
 									      'course_pk': self.get_object().course.pk}))

@@ -4,11 +4,11 @@
 
 {% block body-text %}
 	<div class="user-creation">
-            <form method="post">{% csrf_token %}
-		{{ form.as_p }}
-                <div class="actions">
-                    <button type="submit" class="btn primary">Submit</button>
-                </div>
+            <form role="form" method="post">{% csrf_token %}
+		<div class="form-group">
+			{{ form.as_p }}
+		</div>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
 	</div>
 {% endblock %}

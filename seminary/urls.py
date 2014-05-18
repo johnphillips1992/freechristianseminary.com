@@ -24,6 +24,6 @@ urlpatterns = patterns('',
     url(r'^degrees/(?P<degree_pk>\d+)/courses/(?P<course_pk>\d+)/score/(?P<score>\d+)/$',
 	views.ScoreView.as_view(), name='score'),
     url(r'^accounts/create/$',
-	views.UserCreationView.as_view(), name='user-creation'),
+	views.UserCreationView.as_view(), name='account-creation'),
 )
 

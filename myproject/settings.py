@@ -17,6 +17,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 ADMINS = (('John Phillips', 'john.phillips1992@gmail.com'),)
 
+EMAIL_HOST = 'smtp.webfaction.com'
+EMAIL_HOST_USER = 'johnphillips'
+EMAIL_HOST_PASSWORD = settings_data['email_password']
+DEFAULT_FROM_EMAIL = 'admin@freechristianseminary.com'
+SERVER_EMAIL  = 'admin@freechristianseminary.com'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
