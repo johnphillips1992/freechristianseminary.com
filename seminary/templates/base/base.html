@@ -29,7 +29,7 @@
              </div>
              <div class="modal-body">
                {% for message in messages %}
-                 <div class="alert{% if message.tags %} alert-{{ message-tags }}{% endif %}">
+                 <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}">
                    {{ message }}
                  </div>
                {% endfor %}
