@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 from djangocms_text_ckeditor.fields import HTMLField
 
-
+from cms.models import CMSPlugin
 
 class Degree(models.Model):
 	name = models.CharField(max_length=255, blank=False, null=False)
@@ -24,6 +24,7 @@ class Section(models.Model):
 	course = models.ForeignKey(Course, related_name='sections')
 	content = HTMLField(blank=True, null=True)
 	video_url = models.CharField(max_length=512, blank=True, null=True)
+	last_modified = models.DateTimeField(auto_now=True, blank=True, null=True)
 	def __unicode__(self):
 		return '%s %s %s' % (self.course.degree.name, self.course.name,  self.name)
 
@@ -56,4 +57,7 @@ class Comment(models.Model):
 	is_approved = models.BooleanField()
 	def __unicode__(self):
 		return '%s: %s' % (self.user.username, self.content)
+
+class SectionPlugin(CMSPlugin):
+	sections = models.PositiveIntegerField(blank=True, null=True)
 

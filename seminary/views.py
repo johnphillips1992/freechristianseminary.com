@@ -168,4 +168,11 @@ class UserCreationView(FormView):
 			login(self.request, user)
 		return super(UserCreationView, self).form_valid(form)
 		
+class HomeView(TemplateView):
+	template_name = 'seminary/home.html'
+
+	def get_context_data(self, **context):
+		context = super(HomeView, self).get_context_data(**context)
+		context['sections'] = models.Section.objects.order_by('last_modified').all()[:6]
+		return context
 

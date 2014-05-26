@@ -1,17 +1,31 @@
 {% extends "base/base.html" %}
 
-{% block body-title %}Home{% endblock %}
+{% block body-title %}{% endblock %}
 
 {% block body-text %}
-This is freechristianseminary.com<br>
-<a href="{% url "degree-list" %}">View Our Degrees</a>
+
+<div class="jumbotron" style="text-align: center;">
+<h1>Welcome!</h1>
+
+<p>Learn about Jesus Christ from our Bible studies.</p>
+
+<p><a class="btn btn-primary btn-lg" href="/seminary/">Get Started</a></p>
+</div>
+
 {% endblock %}
 
 {% block lower-content %}
 <div class="container">
   <div class="row">
-    <div class="cl-md-4">
+    {% for section in sections %}
+    <div class="col-sm-4">
+      <div style="opacity: .3;" class="well section-well">
+        <a href="{% url "section-detail" degree_pk=section.course.degree.pk course_pk=section.course.pk section_pk=section.pk %}">
+          <h3>{{ section.name }}</h3>
+        </a>
+      </div>
     </div>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}
